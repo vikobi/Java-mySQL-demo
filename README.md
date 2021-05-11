@@ -66,4 +66,6 @@ NOTE: some useful commands to check exactly which version of app, IP etc
 
 Debugging: Mysql authentication problem
 
-    mysql v8.x uses `caching_sha2_password` as the default authentication plugin instead of `mysql_native_password`. However, many mysql drivers haven't added support for `caching_sha2_password` yet. So we fix that by setting the old authentication plugin when we start the container.
+    mysql v8.x uses `caching_sha2_password` as the default authentication plugin instead of `mysql_native_password`. 
+    However, many mysql drivers haven't added support for `caching_sha2_password` yet. 
+    So we fix that by setting the old authentication plugin when we start the container.
