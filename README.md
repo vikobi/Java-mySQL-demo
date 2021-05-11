@@ -9,7 +9,7 @@ Start mysql container using docker
     -e MYSQL_DATABASE=team-member-projects \
     -e MYSQL_USER=admin \
     -e MYSQL_PASSWORD=adminpass \
-    -d mysql
+    -d mysql mysqld --default-authentication-plugin=mysql_native_password
 
 Alternatively start with docker-compose
 
@@ -55,3 +55,15 @@ Build and start jar file (In the same terminal session where you set the env var
 
     ./gradlew build
     java -jar build/libs/bootcamp-java-mysql-project-1.0-SNAPSHOT.jar
+
+
+NOTE: some useful commands to check exactly which version of app, IP etc
+
+    docker inspect 43594379ced9 | grep -i ipaddress
+    docker inspect 43594379ced9 | grep -i image 
+    docker inspect 43594379ced9 | grep -i version
+
+
+Debugging: Mysql authentication problem
+
+    mysql v8.x uses `caching_sha2_password` as the default authentication plugin instead of `mysql_native_password`. However, many mysql drivers haven't added support for `caching_sha2_password` yet. So we fix that by setting the old authentication plugin when we start the container.
