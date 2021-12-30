@@ -10,6 +10,7 @@ volumePermissions:
   enabled: true
 
 secondary:
+  # 1 primary and 2 secondary replicas
   replicaCount: 2
   persistence:
     accessModes: ["ReadWriteOnce"]
