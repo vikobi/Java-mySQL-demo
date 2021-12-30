@@ -1,0 +1,13 @@
+architecture: replication
+auth:
+  rootPassword: secret-root-pass
+  database: my-app-db
+  username: my-user
+  password: my-pass
+
+secondary:
+  replicaCount: 3
+  # storage class for LKE volumes
+  persistence:
+    storageClass: linode-block-storage
+  
