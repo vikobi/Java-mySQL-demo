@@ -19,10 +19,6 @@ spec:
       containers:
       - name: javamysqlapp
         image: nanajanashia/demo-app:java-mysql-app
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
         ports:
         - containerPort: 8080
         env:
