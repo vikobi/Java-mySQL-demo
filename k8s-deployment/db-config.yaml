@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: db-config
 data:
-  db-server: java-app-service
+  db_server: java-app-service
