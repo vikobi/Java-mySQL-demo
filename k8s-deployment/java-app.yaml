@@ -42,10 +42,7 @@ spec:
                name: db-secret
                key: db_name
          - name: DB_SERVER
-           valueFrom:
-             secretKeyRef:
-               name: db-secret
-               key: db_server
+           value: java-app-service
 ---
 apiVersion: v1
 kind: Service
