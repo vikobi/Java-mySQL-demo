@@ -5,9 +5,13 @@ auth:
   username: my-user
   password: my-pass
 
+# enable init container that changes the owner and group of the persistent volume mountpoint to runAsUser:fsGroup
+volumePermissions:
+  enabled: true
+
 secondary:
-  replicaCount: 3
-  # storage class for LKE volumes
+  replicaCount: 2
   persistence:
+    accessModes: ["ReadWriteOnce"]
+    # storage class for LKE volumes
     storageClass: linode-block-storage
-  
