@@ -144,19 +144,20 @@ As a workaround, try a different region or just use Minikube
 
 **Minikube**
 ```sh
-set the host name in java-app-ingress.yaml line 6 to my-java-app.com
-get minikube ip address with command `minikube ip`, example: 192.168.64.27
-add `192.168.64.27 my-java-app.com` in /etc/hosts file
-create ingress component: kubectl apply -f java-app-ingress.yaml
-
+- set the host name in java-app-ingress.yaml line 6 to my-java-app.com
+- get minikube ip address with command `minikube ip`, example: 192.168.64.27
+- add `192.168.64.27 my-java-app.com` in /etc/hosts file
+- create ingress component: _kubectl apply -f java-app-ingress.yaml_
+- access application from browser on address: `my-java-app.com`
 ```
 
 **LKE**
 ```sh
 - set the host name in java-app-ingress.yaml line 6 to Linode node-balancer address
 - create ingress component: kubectl apply -f java-app-ingress.yaml
-
+- access application from browser on Linode node-balancer address
 ```
+
 
 </details>
 
