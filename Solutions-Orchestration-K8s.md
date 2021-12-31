@@ -18,7 +18,7 @@ minikube start --driver=hyperkit
 
 **LKE**
 ```sh
-On Linode UI dashboard create K8s cluster with 2 smallest nodes "Dedicated 4 GB" plan
+On Linode UI dashboard, create K8s cluster with 2 smallest nodes "Dedicated 4 GB" plan
 ```
 
 </details>
@@ -70,7 +70,6 @@ helm install my-release bitnami/mysql -f mysql-chart-values-lke.yaml
 
 **Minikube & LKE**
 ```sh
-
 # Create my-registry-key secret to pull image
 DOCKER_REGISTRY_SERVER=docker.io
 DOCKER_USER=your dockerID, same as for `docker login`
@@ -101,7 +100,6 @@ kubectl apply -f java-app.yaml
 
 **Minikube & LKE**
 ```sh
-
 kubectly apply -f phpmyadmin.yaml
 
 ```
@@ -145,19 +143,18 @@ As a workaround, try a different region or just use Minikube
  <br />
 
 **Minikube**
-- set the host name in java-app-ingress.yaml line 6 to my-java-app.com
-- get minikube ip address with command `minikube ip`, example: 192.168.64.27
-- add `192.168.64.27 my-java-app.com` in /etc/hosts file
-- create ingress component
 ```sh
-kubectl apply -f java-app-ingress.yaml
+set the host name in java-app-ingress.yaml line 6 to my-java-app.com
+get minikube ip address with command `minikube ip`, example: 192.168.64.27
+add `192.168.64.27 my-java-app.com` in /etc/hosts file
+create ingress component: kubectl apply -f java-app-ingress.yaml
 
 ```
 
 **LKE**
-- set the host name in java-app-ingress.yaml line 6 to linode's node-balancer address
 ```sh
-kubectl apply -f java-app-ingress.yaml
+- set the host name in java-app-ingress.yaml line 6 to Linode node-balancer address
+- create ingress component: kubectl apply -f java-app-ingress.yaml
 
 ```
 
