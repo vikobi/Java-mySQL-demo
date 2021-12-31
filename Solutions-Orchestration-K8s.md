@@ -17,7 +17,9 @@ minikube start --driver=hyperkit
 ```
 
 **LKE**
+```sh
 On Linode UI dashboard create K8s cluster with 2 smallest nodes "Dedicated 4 GB" plan
+```
 
 </details>
 
