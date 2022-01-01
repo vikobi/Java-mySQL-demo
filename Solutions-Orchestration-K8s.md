@@ -190,7 +190,7 @@ kubectl port-forward svc/phpmyadmin-service 8081:8081
 
 <br>
 
-**Check the final version of chart files in `java-app` folder in this `feature/solutions` branch**
+:exclamation: **Check the final version of chart files in `java-app` folder in this `feature/solutions` branch**
 
 <br>
 
