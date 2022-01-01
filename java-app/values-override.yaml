@@ -23,6 +23,6 @@ regularData: {}
  # MY_ENV: my-value
 
 ingress:
-  hostName: my-java-app.com # set this value
+  hostName: my-java-app.com # set this value to Linode nodebalancer address for LKE
   pathType: Exact
   path: /
