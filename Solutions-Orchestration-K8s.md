@@ -188,9 +188,11 @@ kubectl port-forward svc/phpmyadmin-service 8081:8081
 - create `values-override.yaml` and set all the correct values there 
 - set default chart values in `values.yaml` file
 
-<br />
+<br>
+
 **Check the final version of chart files in `java-app` folder in this `feature/solutions` branch**
-<br />
+
+<br>
 
 ***Note**: the `ingress.hostName` must be set to `my-java-app.com` for Minikube & Linode node balancer address*
 
