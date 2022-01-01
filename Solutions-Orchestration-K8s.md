@@ -180,6 +180,7 @@ kubectl port-forward svc/phpmyadmin-service 8081:8081
 **Steps**
 
 - create helm chart boilerplate for your application with chart-name `java-app` using command: `helm create java-app`
+
 Note: This will generate `java-app` folder with chart files
 
 - clean up all unneeded contents from `java-app` folder, as you learned in the module
@@ -188,14 +189,15 @@ Note: This will generate `java-app` folder with chart files
 - set default chart values in `values.yaml` file
 
 Check the final version of chart files in `java-app` folder in this `feature/solutions` branch
+
 Note: the `ingress.hostName` must be set to `my-java-app.com` for Minikube & Linode node balancer address
 
 - to test your chart is correct and debug any issues, do a dry-run
-<br /> 
+
 `helm install my-cool-java-app java-app -f java-app/values-deploy.yaml --dry-run --debug``
 
 - if dry-run shows the k8s manifest files with correct values, everything is working, so you can create the chart release
-<br /> 
+
 `helm install my-cool-java-app java-app -f java-app/values-deploy.yaml` 
 
 - extract the chart `java-app` folder and host into its own new git repository `java-app-chart` 
