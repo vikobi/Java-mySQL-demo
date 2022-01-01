@@ -180,9 +180,9 @@ kubectl port-forward svc/phpmyadmin-service 8081:8081
 **Steps**
 
 - create helm chart boilerplate for your application with chart-name `java-app`:
-<br /> 
-`helm create java-app`
-<br /> 
+
+    `helm create java-app`
+
 Note: This will generate `java-app` folder with chart files
 
 - clean up all unneeded contents from `java-app` folder, as you learned in the module
