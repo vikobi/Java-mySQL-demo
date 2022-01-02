@@ -100,7 +100,7 @@ kubectl apply -f java-app.yaml
 
 **Minikube & LKE**
 ```sh
-kubectly apply -f phpmyadmin.yaml
+kubectl apply -f phpmyadmin.yaml
 
 ```
 
