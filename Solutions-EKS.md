@@ -51,8 +51,10 @@ https://github.com/bitnami/charts/tree/master/bitnami/mysql
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm install my-release bitnami/mysql -f mysql-chart-values-eks.yaml
 
-# deploy phpmyadmin
-kubectly apply -f phpmyadmin.yaml
+# deploy phpmyadmin with its configuration for Mysql DB access
+kubectl apply -f db-config.yaml
+kubectl apply -f db-secret.yaml
+kubectl apply -f phpmyadmin.yaml
 ```
 
 </details>
@@ -78,10 +80,10 @@ kubectl create secret docker-registry my-registry-key \
 --docker-email=$DOCKER_EMAIL
 
 
-# Again from k8s-deployment folder, execute folliwing commands
-kubectl apply -f db-secret.yaml
-kubectl apply -f db-config.yaml
-kubectl apply -f java-app-eks.yaml
+# Again from k8s-deployment folder, execute following commands. By adding the my-app namespace, these components will be created with Fargate profile
+kubectl apply -f db-secret.yaml -n my-app
+kubectl apply -f db-config.yaml -n my-app
+kubectl apply -f java-app.yaml -n my-app
 
 ```
 
@@ -90,7 +92,7 @@ kubectl apply -f java-app-eks.yaml
 ******
 
 <details>
-<summary>Exercise 4: Deploy phpmyadmin </summary>
+<summary>Exercise 4: XXXXXXX </summary>
  <br />
 
 **Minikube & LKE**
