@@ -15,4 +15,4 @@ secondary:
   persistence:
     accessModes: ["ReadWriteOnce"]
     # storage class for EKS volumes
-    storageClass: elastic-block-storage
+    storageClass: gp2
