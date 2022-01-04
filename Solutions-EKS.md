@@ -22,6 +22,10 @@ eksctl create fargateprofile \
 # point kubectl to your cluster
 export KUBECONFIG=kubeconfig.my-cluster.yaml
 
+# validate cluster is accessible and nodes and fargate profile created
+kubectl get node
+eksctl get fargateprofile
+
 ```
 
 </details>
