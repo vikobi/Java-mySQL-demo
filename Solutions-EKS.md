@@ -20,7 +20,7 @@ eksctl create fargateprofile \
     --namespace my-app
 
 # point kubectl to your cluster
-export KUBECONFIG kubeconfig.my-cluster.yaml
+export KUBECONFIG=kubeconfig.my-cluster.yaml
 
 ```
 
