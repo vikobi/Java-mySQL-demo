@@ -56,7 +56,7 @@ https://github.com/bitnami/charts/tree/master/bitnami/mysql
 ```sh
 # install Mysql chart
 helm repo add bitnami https://charts.bitnami.com/bitnami
-helm install mysql-release bitnami/mysql -f mysql-chart-values-eks.yaml
+helm install my-release bitnami/mysql -f mysql-chart-values-eks.yaml
 
 # deploy phpmyadmin with its configuration for Mysql DB access
 kubectl apply -f db-config.yaml
