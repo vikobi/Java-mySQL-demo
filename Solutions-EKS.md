@@ -62,6 +62,17 @@ helm install my-release bitnami/mysql -f mysql-chart-values-eks.yaml
 kubectl apply -f db-config.yaml
 kubectl apply -f db-secret.yaml
 kubectl apply -f phpmyadmin.yaml
+
+# access phpmyadmin and login to mysql db
+kubectl port forward svc/phpmyadmin-service 8081:8081
+
+# access in browser on
+localhost:8081
+
+# login with one of these 2 credentials
+"my-user" : "my-pass"
+"root" : "secret-root-pass"
+
 ```
 
 </details>
