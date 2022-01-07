@@ -85,13 +85,19 @@ localhost:8081
 
 **Steps**
 ```sh
-# Create my-registry-key secret to pull image
+
+# Create namespace my-app to deploy our java application, because we are deploying java-app with fargate profile. And fargate profile we create applies for my-app namespace. 
+kubectl create namespace my-app
+
+# We now have to create all configuration and secrets for our java app in the my-app namespace
+
+# Create my-registry-key secret to pull image 
 DOCKER_REGISTRY_SERVER=docker.io
 DOCKER_USER=your dockerID, same as for `docker login`
 DOCKER_EMAIL=your dockerhub email, same as for `docker login`
 DOCKER_PASSWORD=your dockerhub pwd, same as for `docker login`
 
-kubectl create secret docker-registry my-registry-key \
+kubectl create secret -n my-app docker-registry my-registry-key \
 --docker-server=$DOCKER_REGISTRY_SERVER \
 --docker-username=$DOCKER_USER \
 --docker-password=$DOCKER_PASSWORD \
@@ -99,7 +105,6 @@ kubectl create secret docker-registry my-registry-key \
 
 
 # Again from k8s-deployment folder, execute following commands. By adding the my-app namespace, these components will be created with Fargate profile
-kubectl create namespace my-app
 kubectl apply -f db-secret.yaml -n my-app
 kubectl apply -f db-config.yaml -n my-app
 kubectl apply -f java-app.yaml -n my-app
