@@ -24,7 +24,7 @@ export KUBECONFIG=absolute-path/kubeconfig.my-cluster.yaml
 
 # validate cluster is accessible and nodes and fargate profile created
 kubectl get node
-eksctl get fargateprofile
+eksctl get fargateprofile --cluster my-cluster
 
 ```
 
