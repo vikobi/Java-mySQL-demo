@@ -20,7 +20,7 @@ eksctl create fargateprofile \
     --namespace my-app
 
 # point kubectl to your cluster - use absolute path to kubeconfigfile
-export KUBECONFIG=absolute-path/kubeconfig.my-cluster.yaml
+export KUBECONFIG={absolute-path}/kubeconfig.my-cluster.yaml
 
 # validate cluster is accessible and nodes and fargate profile created
 kubectl get node
