@@ -99,6 +99,7 @@ kubectl create secret docker-registry my-registry-key \
 
 
 # Again from k8s-deployment folder, execute following commands. By adding the my-app namespace, these components will be created with Fargate profile
+kubectl create namespace my-app
 kubectl apply -f db-secret.yaml -n my-app
 kubectl apply -f db-config.yaml -n my-app
 kubectl apply -f java-app.yaml -n my-app
