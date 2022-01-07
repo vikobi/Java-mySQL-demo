@@ -11,7 +11,7 @@
 **Steps**
 ```sh
 # create cluster with 3 EC2 instances and store access configuration to cluster in kubeconfig.my-cluster.yaml file 
-eksctl create cluster --name=my-cluster --nodes=3 --kubeconfig=~/kubeconfig.my-cluster.yaml
+eksctl create cluster --name=my-cluster --nodes=3 --kubeconfig=./kubeconfig.my-cluster.yaml
 
 # create fargate profile in the cluster. It will apply for all K8s components in my-app namespace
 eksctl create fargateprofile \
@@ -20,7 +20,7 @@ eksctl create fargateprofile \
     --namespace my-app
 
 # point kubectl to your cluster - use absolute path to kubeconfigfile
-export KUBECONFIG=~/kubeconfig.my-cluster.yaml
+export KUBECONFIG=absolute-path/kubeconfig.my-cluster.yaml
 
 # validate cluster is accessible and nodes and fargate profile created
 kubectl get node
