@@ -164,6 +164,6 @@ _You learn how to do this in the K8s on AWS module_
 <summary>Exercise 6: Configure Autoscaling </summary>
  <br />
 
-You learn how to scale the cluster up and down in the _Kubernetes on AWS_ module, video _3 - Configure Autoscaling in EKS cluster_
+You learn how to scale the cluster up and down in the **_Kubernetes on AWS_** module, video **_3 - Configure Autoscaling in EKS cluster_**
 
 
