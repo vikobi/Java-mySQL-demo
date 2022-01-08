@@ -153,6 +153,7 @@ kubectl create secret -n my-app docker-registry my-ecr-registry-key \
 Before the pipeline can run, you will have to configure following in Jenkins:
 - ECR credentials that Jenkins will use to push images
 - AWS & K8s credentials that Jenkins will use to access the EKS cluster 
+
 _You learn how to do this in the K8s on AWS module_
 
 </details>
