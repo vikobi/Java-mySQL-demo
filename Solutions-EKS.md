@@ -122,6 +122,7 @@ kubectl apply -f java-app.yaml -n my-app
  <br />
 
 **Current cluster setup**
+
 At this point, you already have an EKS cluster, where: 
 - Mysql chart is deployed and phpmyadmin is running too
 - my-app namespace was created
@@ -148,6 +149,7 @@ kubectl create secret -n my-app docker-registry my-ecr-registry-key \
 ```
 
 **Configure access credentials in Jenkins**
+
 Before the pipeline can run, you will have to configure following in Jenkins:
 - ECR credentials that Jenkins will use to push images
 - AWS & K8s credentials that Jenkins will use to access the EKS cluster 
