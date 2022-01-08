@@ -5,6 +5,7 @@ pipeline {
     environment {
         ECR_REPO_URL = 'replace-with-your-ecr-url'
         IMAGE_REPO = "${ECR_REPO_URL}/java-app"
+        IMAGE_NAME = "1.0-${BUILD_NUMBER}"
     }
     stages {
         stage('build app') {
