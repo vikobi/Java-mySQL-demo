@@ -118,9 +118,10 @@ kubectl apply -f java-app.yaml -n my-app
 ******
 
 <details>
-<summary>Exercise 4: Automate deployment </summary>
+<summary>Exercise 4 & 5: Automate deployment & Use ECR as Docker repository </summary>
  <br />
 
+**Current cluster setup**
 At this point, you already have an EKS cluster, where: 
 - Mysql chart is deployed and phpmyadmin is running too
 - my-app namespace was created
@@ -146,6 +147,7 @@ kubectl create secret -n my-app docker-registry my-ecr-registry-key \
 
 ```
 
+**Configure access credentials in Jenkins**
 Before the pipeline can run, you will have to configure following in Jenkins:
 - ECR credentials that Jenkins will use to push images
 - AWS & K8s credentials that Jenkins will use to access the EKS cluster 
@@ -156,103 +158,9 @@ _You learn how to do this in the K8s on AWS module_
 ******
 
 <details>
-<summary>Exercise 5: Deploy Ingress Controller </summary>
+<summary>Exercise 6: Configure Autoscaling </summary>
  <br />
 
-**Minikube**
-```sh
-# minikube comes with ingress addon, so we just need to activate it
-minikube addons enable ingress 
-
-```
-
-**LKE**
-```sh
-helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-helm repo update
-helm install ingress-nginx ingress-nginx/ingress-nginx
-
-```
-
-**Notes on installing Ingress-controller on LKE**
-- Chart link: https://github.com/kubernetes/ingress-nginx/tree/main/charts/ingress-nginx
-- Known issue when pulling ingress-nginx images from k8s repository:
-https://www.reddit.com/r/kubernetes/comments/rorzhd/nginx_ingress_unable_to_pull_official_images/
-
-As a workaround, try a different region or just use Minikube
-
-</details>
-
-******
-
-<details>
-<summary>Exercise 6: Create Ingress rule </summary>
- <br />
-
-**Minikube**
-
-- set the host name in java-app-ingress.yaml line 6 to my-java-app.com
-- get minikube ip address with command `minikube ip`, example: 192.168.64.27
-- add `192.168.64.27 my-java-app.com` in /etc/hosts file
-- create ingress component: `kubectl apply -f java-app-ingress.yaml`
-- access application from browser on address: `my-java-app.com`
-
-**LKE**
-- set the host name in java-app-ingress.yaml line 6 to Linode node-balancer address
-- create ingress component: `kubectl apply -f java-app-ingress.yaml`
-- access application from browser on Linode node-balancer address
-
-</details>
-
-******
-
-<details>
-<summary>Exercise 7: Port-forward for phpmyadmin </summary>
- <br />
-
-**Minikube & LKE**
-```sh
-kubectl port-forward svc/phpmyadmin-service 8081:8081
-
-```
-
-</details>
-
-******
-
-<details>
-<summary>Exercise 8: Create Helm Chart for Java App </summary>
- <br />
-
-**Steps**
-
-- create helm chart boilerplate for your application with chart-name `java-app` using command: `helm create java-app`
-
-***Note**: This will generate `java-app` folder with chart files*
-
-- clean up all unneeded contents from `java-app` folder, as you learned in the module
-- create template files for `db-config.yaml`, `db-secret.yaml`, `java-app-deployment.yaml`, `java-app-ingress.yaml`, `java-app-service.yaml`
-- create `values-override.yaml` and set all the correct values there 
-- set default chart values in `values.yaml` file
-
-<br>
-
-:exclamation: **Check the final version of chart files in `java-app` folder in this `feature/solutions` branch**
-
-<br>
-
-***Note**: the `ingress.hostName` must be set to `my-java-app.com` for Minikube & Linode node balancer address*
-
-- validate that your chart is correct and debug any issues, do a dry-run
-
-`helm install my-cool-java-app java-app -f java-app/values-deploy.yaml --dry-run --debug`
-
-- if dry-run shows the k8s manifest files with correct values, everything is working, so you can create the chart release
-
-`helm install my-cool-java-app java-app -f java-app/values-deploy.yaml` 
-
-- extract the chart `java-app` folder and host into its own new git repository `java-app-chart` 
-
-</details>
+You learn how to scale the cluster up and down in the _Kubernetes on AWS_ module, video _3 - Configure Autoscaling in EKS cluster_
 
 
