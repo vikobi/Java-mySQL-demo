@@ -118,14 +118,38 @@ kubectl apply -f java-app.yaml -n my-app
 ******
 
 <details>
-<summary>Exercise 4: XXXXXXX </summary>
+<summary>Exercise 4: Automate deployment </summary>
  <br />
 
-**Minikube & LKE**
+At this point, you already have an EKS cluster, where: 
+- Mysql chart is deployed and phpmyadmin is running too
+- my-app namespace was created
+- db-config and db-secret were created in the my-app namspace for the java-app
+- my-registry-key secret was created to fetch image from docker-hub
+- your java app is also running 
+
+**Steps to automate deployment for existing setup**
 ```sh
-kubectly apply -f phpmyadmin.yaml
+# Create a docker registry secret for ECR
+DOCKER_REGISTRY_SERVER=your ECR registry server
+DOCKER_USER=your dockerID, same as for `docker login`
+DOCKER_EMAIL=your dockerhub email, same as for `docker login`
+DOCKER_PASSWORD=your dockerhub pwd, same as for `docker login`
+
+kubectl create secret -n my-app docker-registry my-ecr-registry-key \
+--docker-server=$DOCKER_REGISTRY_SERVER \
+--docker-username=$DOCKER_USER \
+--docker-password=$DOCKER_PASSWORD \
+--docker-email=$DOCKER_EMAIL
+
+# Create Jenkins pipeline using the Jenkinsfile in k8s-deployment folder
 
 ```
+
+Before the pipeline can run, you will have to configure following in Jenkins:
+- ECR credentials that Jenkins will use to push images
+- AWS & K8s credentials that Jenkins will use to access the EKS cluster 
+_You learn how to do this in the K8s on AWS module_
 
 </details>
 
