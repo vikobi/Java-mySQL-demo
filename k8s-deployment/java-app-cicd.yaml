@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: $APP_NAME-deployment
+  namespace: $APP_NAMESPACE
   labels:
     app: $APP_NAME
 spec:
@@ -48,6 +49,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: $APP_NAME-service
+  namespace: $APP_NAMESPACE
 spec:
   selector:
     app: $APP_NAME
