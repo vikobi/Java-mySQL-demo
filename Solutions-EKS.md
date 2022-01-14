@@ -132,7 +132,9 @@ At this point, you already have an EKS cluster, where:
 
 **Steps to automate deployment for existing setup**
 ```sh
-# Create a docker registry secret for ECR
+# Create an ECR registry for your java-app image
+
+# Locally, on your computer: Create a docker registry secret for ECR
 DOCKER_REGISTRY_SERVER=your ECR registry server
 DOCKER_USER=your dockerID, same as for `docker login`
 DOCKER_EMAIL=your dockerhub email, same as for `docker login`
@@ -144,6 +146,30 @@ kubectl create secret -n my-app docker-registry my-ecr-registry-key \
 --docker-password=$DOCKER_PASSWORD \
 --docker-email=$DOCKER_EMAIL
 
+
+# SSH into server where Jenkins container is running
+ssh -i {private-key-path} {user}@{public-ip}
+
+# Enter Jenkins container
+sudo docker exec -it {jenkins-container-id} -u 0 bash
+
+# Install aws-cli inside Jenkins container
+- Link: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+./aws/install
+
+# Install kubectl inside Jenkins container
+- Link: https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
+
+apt-get update
+apt-get install -y apt-transport-https ca-certificates curl
+curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+apt-get update
+apt-get install -y kubectl
+
 # Create Jenkins pipeline using the Jenkinsfile in k8s-deployment folder
 
 ```
@@ -151,8 +177,7 @@ kubectl create secret -n my-app docker-registry my-ecr-registry-key \
 **Configure access credentials in Jenkins**
 
 Before the pipeline can run, you will have to configure following in Jenkins:
-- install aws-cli inside Jenkins container
-- install kubectl inside Jenkins container
+
 - Create Jenkins credentials for ECR that Jenkins will use to push images
 - Create Jenkins credentials for AWS that Jenkins will use to access the EKS cluster 
 - Create Secret data as Jenkins credentials with Kind: _"secret text"_ and credential ids: _"db_user"_, _"db_pass"_, _"db_name"_, _"db_root_pass"_ that Jenkins will use to set secret data values
