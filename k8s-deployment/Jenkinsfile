@@ -6,6 +6,8 @@ pipeline {
         ECR_REPO_URL = 'replace-with-your-ecr-url'
         IMAGE_REPO = "${ECR_REPO_URL}/java-app"
         IMAGE_NAME = "1.0-${BUILD_NUMBER}"
+        CLUSTER_NAME = "my-cluster"
+        CLUSTER_REGION = "eu-west-3"
     }
     stages {
         stage('build app') {
@@ -37,6 +39,9 @@ pipeline {
             }
             steps {
                 script {
+                    // configure kubeconfig context to access the cluster with kubectl - alternative to copying the kubeconfig file to Jenkins server manually
+                    aws eks update-kubeconfig --name ${CLUSTER_NAME} --region ${CLUSTER_REGION}
+
                     // set variable values for db-secret data, by accessing the secret values, defined in Jenkins credentials as a "secret text" credentials type. We access them using the credentials id
                     db_name = credentials('db-user')
                     db_pass = credentials('db-pass')
