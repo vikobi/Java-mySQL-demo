@@ -172,11 +172,11 @@ apt-get install -y kubectl
 - "jenkins_aws_access_key_id" for AWS_ACCESS_KEY_ID 
 - "jenkins_aws_secret_access_key" for AWS_SECRET_ACCESS_KEY    
 
-# Create 4 "secret-text" credentials for db-secret.yaml with credential ideas:
-- "db_user"
-- "db_pass"
-- "db_name"
-- "db_root_pass"
+# Create 4 "secret-text" credentials for db-secret.yaml:
+- id: "db_user", secret: "my-user"
+- id: "db_pass", secret: "my-pass"
+- id: "db_name", secret: "my-app-db"
+- id: "db_root_pass", secret: "secret-root-pass"
 
 # Create Jenkins pipeline using the Jenkinsfile in k8s-deployment folder to execute Jenkinsfile in k8s-deployment folder for your java-app project
 
