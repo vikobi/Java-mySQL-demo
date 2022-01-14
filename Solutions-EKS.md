@@ -135,16 +135,14 @@ At this point, you already have an EKS cluster, where:
 # Create an ECR registry for your java-app image
 
 # Locally, on your computer: Create a docker registry secret for ECR
-DOCKER_REGISTRY_SERVER=your ECR registry server - ex: `664574038682.dkr.ecr.eu-west-3.amazonaws.com`
-DOCKER_USER=your dockerID, same as for `docker login`
-DOCKER_EMAIL=your dockerhub email, same as for `docker login`
-DOCKER_PASSWORD=your dockerhub pwd, same as for `docker login`
+DOCKER_REGISTRY_SERVER=your ECR registry server - "664574038682.dkr.ecr.eu-west-3.amazonaws.com"
+DOCKER_USER=your dockerID, same as for `docker login` - "AWS"
+DOCKER_PASSWORD=your dockerhub pwd, same as for `docker login` - get using: "aws ecr get-login-password --region {ecr-region}"
 
 kubectl create secret -n my-app docker-registry my-ecr-registry-key \
 --docker-server=$DOCKER_REGISTRY_SERVER \
 --docker-username=$DOCKER_USER \
---docker-password=$DOCKER_PASSWORD \
---docker-email=$DOCKER_EMAIL
+--docker-password=$DOCKER_PASSWORD
 
 
 # SSH into server where Jenkins container is running
