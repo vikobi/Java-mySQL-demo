@@ -168,6 +168,9 @@ echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https:/
 apt-get update
 apt-get install -y kubectl
 
+# Add Jenkins user to docker group so that it can execute docker commands without sudo
+
+
 # create 2 "secret-text" credentials for AWS access in Jenkins: 
 - "jenkins_aws_access_key_id" for AWS_ACCESS_KEY_ID 
 - "jenkins_aws_secret_access_key" for AWS_SECRET_ACCESS_KEY    
