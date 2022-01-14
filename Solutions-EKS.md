@@ -168,19 +168,19 @@ echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https:/
 apt-get update
 apt-get install -y kubectl
 
-# Create Jenkins pipeline using the Jenkinsfile in k8s-deployment folder
+# create 2 "secret-text" credentials for AWS access in Jenkins: 
+- "jenkins_aws_access_key_id" for AWS_ACCESS_KEY_ID 
+- "jenkins_aws_secret_access_key" for AWS_SECRET_ACCESS_KEY    
+
+# Create 4 "secret-text" credentials for db-secret.yaml with credential ideas:
+- "db_user"
+- "db_pass"
+- "db_name"
+- "db_root_pass"
+
+# Create Jenkins pipeline using the Jenkinsfile in k8s-deployment folder to execute Jenkinsfile in k8s-deployment folder for your java-app project
 
 ```
-
-**Configure access credentials in Jenkins**
-
-Before the pipeline can run, you will have to configure following in Jenkins:
-
-- Create Jenkins credentials for ECR that Jenkins will use to push images
-- Create Jenkins credentials for AWS that Jenkins will use to access the EKS cluster 
-- Create Secret data as Jenkins credentials with Kind: _"secret text"_ and credential ids: _"db_user"_, _"db_pass"_, _"db_name"_, _"db_root_pass"_ that Jenkins will use to set secret data values
-
-_You learn how to do this in the K8s on AWS module_
 
 </details>
 
