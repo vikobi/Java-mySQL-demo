@@ -171,7 +171,8 @@ apt-get install -y kubectl
 # Install envsubst tool
 - Link: https://command-not-found.com/envsubst
 
-apt-get install gettext-base
+apt-get update
+apt-get install -y gettext-base
 
 # create 2 "secret-text" credentials for AWS access in Jenkins: 
 - "jenkins_aws_access_key_id" for AWS_ACCESS_KEY_ID 
