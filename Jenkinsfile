@@ -22,9 +22,9 @@ pipeline {
             steps {
                 script {
                     echo "building the docker image..."
-                    sh "docker build -t ${IMAGE_REPO}:${IMAGE_NAME} ."
-                    sh "aws ecr get-login-password --region ${CLUSTER_REGION} | docker login --username AWS --password-stdin ${ECR_REPO_URL}"
-                    sh "docker push ${IMAGE_REPO}:${IMAGE_NAME}"
+                    sh "sudo docker build -t ${IMAGE_REPO}:${IMAGE_NAME} ."
+                    sh "aws ecr get-login-password --region ${CLUSTER_REGION} | sudo docker login --username AWS --password-stdin ${ECR_REPO_URL}"
+                    sh "sudo docker push ${IMAGE_REPO}:${IMAGE_NAME}"
 
                 }
             }
