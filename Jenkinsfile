@@ -46,9 +46,8 @@ pipeline {
                     db_root_pass = credentials('db-root-pass')
 
                     DB_USER = sh(script: "echo -n ${db_user} | base64", returnStdout: true).trim()
-                    DB_PASS = sh(script: "echo -n ${db_pass} | base64", returnStdout: true).trim()
-                    DB_NAME = sh(script: "echo -n ${db_name} | base64", returnStdout: true).trim()
-                    DB_ROOT_PASS = sh(script: "echo -n ${db_root_pass} | base64", returnStdout: true).trim()
+                    
+                    echo "${DB_USER}"
                     
                     echo 'deploying new release to EKS...'
                     sh 'envsubst < k8s-deployment/java-app-cicd.yaml | kubectl apply -f -'
