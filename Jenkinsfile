@@ -34,6 +34,7 @@ pipeline {
             environment {
                 APP_NAME = 'java-app'
                 APP_NAMESPACE = 'my-app'
+                // Note: credentials helper function only works in the environment block
                 DB_USER_SECRET = credentials('db_user')
                 DB_PASS_SECRET = credentials('db_pass')
                 DB_NAME_SECRET = credentials('db_name')
