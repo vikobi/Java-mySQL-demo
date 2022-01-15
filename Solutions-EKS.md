@@ -135,7 +135,7 @@ At this point, you already have an EKS cluster, where:
 # Create an ECR registry for your java-app image
 
 # Locally, on your computer: Create a docker registry secret for ECR
-DOCKER_REGISTRY_SERVER=your ECR registry server - "664574038682.dkr.ecr.eu-west-3.amazonaws.com"
+DOCKER_REGISTRY_SERVER=your ECR registry server - "your-aws-id.dkr.ecr.your-ecr-region.amazonaws.com"
 DOCKER_USER=your dockerID, same as for `docker login` - "AWS"
 DOCKER_PASSWORD=your dockerhub pwd, same as for `docker login` - get using: "aws ecr get-login-password --region {ecr-region}"
 
@@ -184,7 +184,13 @@ apt-get install -y gettext-base
 - id: "db_name", secret: "my-app-db"
 - id: "db_root_pass", secret: "secret-root-pass"
 
-# Create Jenkins pipeline using the Jenkinsfile in k8s-deployment folder to execute Jenkinsfile in k8s-deployment folder for your java-app project
+# Set the correct values in Jenkins for following environment variables: 
+- ECR_REPO_URL
+- CLUSTER_REGION
+
+# Create Jenkins pipeline using the Jenkinsfile in this branch, in the root folder
+
+_Make sure the paths to the k8s manifest files in the "deploy" stage of the Jenkinsfile are all correct!!_
 
 ```
 
