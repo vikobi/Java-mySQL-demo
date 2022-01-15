@@ -3,7 +3,7 @@
 pipeline {
     agent any
     environment {
-        ECR_REPO_URL = '664574038682.dkr.ecr.eu-west-3.amazonaws.com'
+        ECR_REPO_URL = '{your-aws-id}.dkr.ecr.eu-west-3.amazonaws.com'
         IMAGE_REPO = "${ECR_REPO_URL}/java-app"
         IMAGE_NAME = "1.0-${BUILD_NUMBER}"
         CLUSTER_NAME = "my-cluster"
