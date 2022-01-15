@@ -40,10 +40,10 @@ pipeline {
                     sh "aws eks update-kubeconfig --name ${CLUSTER_NAME} --region ${CLUSTER_REGION}"
 
                     // set variable values for db-secret data, by accessing the secret values, defined in Jenkins credentials as a "secret text" credentials type. We access them using the credentials id
-                    db_user = credentials('db-user')
-                    db_pass = credentials('db-pass')
-                    db_name = credentials('db-name')
-                    db_root_pass = credentials('db-root-pass')
+                    db_user = credentials('db_user')
+                    db_pass = credentials('db_pass')
+                    db_name = credentials('db_name')
+                    db_root_pass = credentials('db_root_pass')
 
                     DB_USER = sh(script: "echo -n ${db_user} | base64", returnStdout: true).trim()
                     DB_PASS = sh(script: "echo -n ${db_pass} | base64", returnStdout: true).trim()
