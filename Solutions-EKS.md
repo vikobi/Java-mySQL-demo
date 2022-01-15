@@ -189,7 +189,6 @@ apt-get install -y gettext-base
 - CLUSTER_REGION
 
 # Create Jenkins pipeline using the Jenkinsfile in this branch, in the root folder
-
 _Make sure the paths to the k8s manifest files in the "deploy" stage of the Jenkinsfile are all correct!!_
 
 ```
