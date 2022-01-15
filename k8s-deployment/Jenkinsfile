@@ -8,6 +8,8 @@ pipeline {
         IMAGE_NAME = "1.0-${BUILD_NUMBER}"
         CLUSTER_NAME = "my-cluster"
         CLUSTER_REGION = "eu-west-3"
+        AWS_ACCESS_KEY_ID = credentials('jenkins_aws_access_key_id')
+        AWS_SECRET_ACCESS_KEY = credentials('jenkins_aws_secret_access_key')
     }
     stages {
         stage('build app') {
@@ -31,26 +33,21 @@ pipeline {
         }
         stage('deploy') {
             environment {
-                AWS_ACCESS_KEY_ID = credentials('jenkins_aws_access_key_id')
-                AWS_SECRET_ACCESS_KEY = credentials('jenkins_aws_secret_access_key')
                 APP_NAME = 'java-app'
                 APP_NAMESPACE = 'my-app'
+                DB_USER_SECRET = credentials('db_user')
+                DB_PASS_SECRET = credentials('db_pass')
+                DB_NAME_SECRET = credentials('db_name')
+                DB_ROOT_PASS_SECRET = credentials('db_root_pass')
             }
             steps {
                 script {
-                    // configure kubeconfig context to access the cluster with kubectl - alternative to copying the kubeconfig file to Jenkins server manually
                     sh "aws eks update-kubeconfig --name ${CLUSTER_NAME} --region ${CLUSTER_REGION}"
 
-                    // set variable values for db-secret data, by accessing the secret values, defined in Jenkins credentials as a "secret text" credentials type. We access them using the credentials id
-                    db_name = credentials('db-user')
-                    db_pass = credentials('db-pass')
-                    db_name = credentials('db-name')
-                    db_root_pass = credentials('db-root-pass')
-
-                    DB_USER = sh(script: 'echo -n $db_user | base64', returnStdout: true, returnStatus: true)
-                    DB_PASS = sh(script: 'echo -n $db_pass | base64', returnStdout: true, returnStatus: true)
-                    DB_NAME = sh(script: 'echo -n $db_name | base64', returnStdout: true, returnStatus: true)
-                    DB_ROOT_PASS = sh(script: 'echo -n $db_root_pass | base64', returnStdout: true, returnStatus: true)
+                    DB_USER = sh(script: 'echo -n $DB_USER_SECRET | base64', returnStdout: true).trim()
+                    DB_PASS = sh(script: 'echo -n $DB_PASS_SECRET | base64', returnStdout: true).trim()
+                    DB_NAME = sh(script: 'echo -n $DB_NAME_SECRET | base64', returnStdout: true).trim()
+                    DB_ROOT_PASS = sh(script: 'echo -n $DB_ROOT_PASS_SECRET | base64', returnStdout: true).trim()
                     
                     echo 'deploying new release to EKS...'
                     sh 'envsubst < java-app-cicd.yaml | kubectl apply -f -'
