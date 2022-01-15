@@ -8,6 +8,8 @@ pipeline {
         IMAGE_NAME = "1.0-${BUILD_NUMBER}"
         CLUSTER_NAME = "my-cluster"
         CLUSTER_REGION = "eu-west-3"
+        AWS_ACCESS_KEY_ID = credentials('jenkins_aws_access_key_id')
+        AWS_SECRET_ACCESS_KEY = credentials('jenkins_aws_secret_access_key')
     }
     stages {
         stage('build app') {
@@ -30,8 +32,6 @@ pipeline {
         }
         stage('deploy') {
             environment {
-                AWS_ACCESS_KEY_ID = credentials('jenkins_aws_access_key_id')
-                AWS_SECRET_ACCESS_KEY = credentials('jenkins_aws_secret_access_key')
                 APP_NAME = 'java-app'
                 APP_NAMESPACE = 'my-app'
             }
