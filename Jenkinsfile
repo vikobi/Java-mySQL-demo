@@ -41,16 +41,20 @@ pipeline {
             }
             steps {
                 script {
+                    // configure kubeconfig context to access the cluster with kubectl - alternative to copying the kubeconfig file to Jenkins server manually
                     sh "aws eks update-kubeconfig --name ${CLUSTER_NAME} --region ${CLUSTER_REGION}"
 
                     // set variable values for db-secret data, by accessing the secret values, defined in Jenkins credentials as a "secret text" credentials type. We access them using the credentials id
                     
-                    DB_USER = sh(script: "echo -n ${DB_USER_SECRET} | base64", returnStdout: true).trim()
-                    DB_PASS = sh(script: "echo -n ${DB_PASS_SECRET} | base64", returnStdout: true).trim()
-                    DB_NAME = sh(script: "echo -n ${DB_NAME_SECRET} | base64", returnStdout: true).trim()
-                    DB_ROOT_PASS = sh(script: "echo -n ${DB_ROOT_PASS_SECRET} | base64", returnStdout: true).trim()
+                    DB_USER = sh(script: 'echo -n $DB_USER_SECRET | base64', returnStdout: true).trim()
+                    DB_PASS = sh(script: 'echo -n $DB_PASS_SECRET | base64', returnStdout: true).trim()
+                    DB_NAME = sh(script: 'echo -n $DB_NAME_SECRET | base64', returnStdout: true).trim()
+                    DB_ROOT_PASS = sh(script: 'echo -n $DB_ROOT_PASS_SECRET | base64', returnStdout: true).trim()
                     
-                    echo "${DB_USER}"
+
+                    // Note the correct usage of secret credentials in script: https://www.jenkins.io/doc/book/pipeline/jenkinsfile/#interpolation-of-sensitive-environment-variables
+                    // Wrong: script: "echo -n ${DB_PASS_SECRET} | base64"
+                    // Correct: script: 'echo -n $DB_PASS_SECRET | base64'
                     
                     echo 'deploying new release to EKS...'
                     sh 'envsubst < k8s-deployment/java-app-cicd.yaml | kubectl apply -f -'
