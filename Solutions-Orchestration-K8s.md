@@ -63,7 +63,8 @@ helm install my-release bitnami/mysql -f mysql-chart-values-lke.yaml
 **Note**
 ```sh
 If you get an error, that your application cant access database, then use the version 8.8.6 of mysql chart, using --version 8.8.6 flag at the end of helm install command
-Reason is that Mysql Chart version 8.8.8+ has a bug setting the db user password incorrectly: https://giters.com/bitnami/charts/issues/8557, and causes the connection to database to fail. 
+helm install ... --version 8.8.6
+# Reason is that Mysql Chart version 8.8.8+ has a bug setting the db user password incorrectly: https://giters.com/bitnami/charts/issues/8557, and causes the connection to database to fail. 
 ```
 
 </details>
