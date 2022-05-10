@@ -15,7 +15,7 @@
     docker-compose -f docker-compose-full.yaml up
 
 ### debugging note:
-Tthe index.html must be in one of the following directories in order to be packaged in a jar:
+The index.html must be in one of the following directories in order to be packaged in a jar:
     ["classpath:/META-INF/resources/", "classpath:/resources/", "classpath:/static/", "classpath:/public/", "/"]    
 
 Webapp directory will be silently ignored. So don't use that when building a jar, only works for war.      
