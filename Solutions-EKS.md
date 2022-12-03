@@ -56,9 +56,7 @@ https://github.com/bitnami/charts/tree/master/bitnami/mysql
 ```sh
 # install Mysql chart 
 helm repo add bitnami https://charts.bitnami.com/bitnami
-helm install my-release bitnami/mysql -f mysql-chart-values-eks.yaml --version 8.8.6
-# Note that chart version version 8.8.8+ has a bug setting the db user password incorrectly, which affects EKS installation: https://giters.com/bitnami/charts/issues/8557, that's why we are installing an older version. 
-
+helm install my-release bitnami/mysql -f mysql-chart-values-eks.yaml
 
 # deploy phpmyadmin with its configuration for Mysql DB access
 kubectl apply -f db-config.yaml
